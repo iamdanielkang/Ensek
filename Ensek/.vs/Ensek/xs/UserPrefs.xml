@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{BC32EC77-1B47-494B-9E53-CDA2454C0F50}|Default">
+  <MonoDevelop.Ide.ItemProperties.Ensek PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Ensek/Startup.cs">
+    <Files>
+      <File FileName="Ensek/Controllers/MeterReadingController.cs" Line="86" Column="92" />
+      <File FileName="Ensek/appsettings.json" Line="1" Column="1" />
+      <File FileName="Ensek/Program.cs" Line="1" Column="1" />
+      <File FileName="Ensek/Models/MeterReadingContext.cs" Line="14" Column="2" />
+      <File FileName="Ensek/Models/MeterReadingItem.cs" Line="4" Column="86" />
+      <File FileName="Ensek/Startup.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Ensek" expanded="True">
+            <Node name="Ensek" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Properties" expanded="True" />
+              <Node name="Services" expanded="True" />
+              <Node name="Startup.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
