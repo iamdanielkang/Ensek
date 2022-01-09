@@ -22,11 +22,7 @@ namespace Ensek.Controllers
     {
         private readonly MeterReadingContext _context;
         private MeterReadingService meterReadingService = new MeterReadingService();
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+        
         private readonly ILogger<MeterReadingController> _logger;
 
         public MeterReadingController(MeterReadingContext context, ILogger<MeterReadingController> logger)
@@ -35,21 +31,10 @@ namespace Ensek.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
+        
 
         // GET: api/Meter
-        [HttpGet("test-get")]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<MeterReadingItem>>> GetTodoItems()
         {
             return await _context.MeterReadingItems.ToListAsync();
@@ -61,6 +46,8 @@ namespace Ensek.Controllers
         public async Task<IActionResult> OnPostUploadAsync(IFormFile formFile)
         {    
             var setOfItems = new HashSet<MeterReadingItem>();
+            int success = 0;
+            int total = 0;
             if (formFile.Length > 0)
             {
                 var stream = formFile.OpenReadStream();
@@ -73,6 +60,7 @@ namespace Ensek.Controllers
                     string[] line;
                     while (!parser.EndOfData)
                     {
+                        total++; 
                         try
                         {
                             line = parser.ReadFields();
@@ -84,12 +72,9 @@ namespace Ensek.Controllers
 
                             var meterReadingItem = new MeterReadingItem(accountId, dateTime, meterReadingValue);
                             setOfItems.Add(meterReadingItem);
-
-                            //! TODO: Add the item to DBContext
-                            // Current error: since Id is already being used, causing errors so must find workaround
-                            //
-                            //_context.MeterReadingItems.Add(meterReadingItem);
-                            //await _context.SaveChangesAsync();
+                            _context.MeterReadingItems.Add(meterReadingItem);
+                            await _context.SaveChangesAsync();
+                            success++;
 
                         }
                         catch (Exception e)
@@ -102,9 +87,8 @@ namespace Ensek.Controllers
             }
 
             _logger.LogInformation("Final Set is " + string.Join("\n", setOfItems) + "\nLength of set is: " + setOfItems.Count);
-            
 
-            return Ok();
+            return Ok(new {success, failure = total - success - 1});
         }
     }
 }

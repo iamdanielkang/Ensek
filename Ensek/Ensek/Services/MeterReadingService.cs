@@ -52,10 +52,5 @@ namespace Ensek.Services
                 return false;
             }
         }
-
-        //public Boolean LoadForm(IFormFile formFile)
-        //{
-            
-        //}
     }
 }

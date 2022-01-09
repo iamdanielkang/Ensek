@@ -7382,7 +7382,7 @@
       "outputPath": "/Users/DanielKang/Projects/Ensek/Ensek/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/DanielKang/.nuget/NuGet/NuGet.Config"
+        "/Users/DanielKang/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
